@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "./.comlint/.eslintrc.json"
+  ],
+  "globals": {
+    /* vue3 */
+    "getCurrentInstance": "readonly",
+    "ref": "readonly",
+    "computed": "readonly",
+    "watch": "readonly",
+    "nextTick": "readonly",
+    "onMounted": "readonly",
+    "onUpdated": "readonly",
+    "onUnmounted": "readonly",
+    "onBeforeMount": "readonly",
+    "onBeforeUpdate": "readonly",
+    "onBeforeUnmount": "readonly",
+    "onActivated": "readonly",
+    "onDeactivated": "readonly",
+    "toRefs": "readonly",
+    "h": "readonly",
+    /* vue-router */
+    "useRoute": "readonly",
+    "useRouter": "readonly",
+    /* pinia */
+    "createPinia": "readonly",
+    "defineStore": "readonly",
+    "storeToRefs": "readonly",
+    /* vueuse */
+    "useElementBounding": "readonly",
+    "useElementSize": "readonly",
+    /* 自定义 */
+    "http": "readonly",
+    "store": "readonly",
+    "useCompName": "readonly",
+    "usePage": "readonly",
+    "mexp": "readonly",
+    "dayjsFormat": "readonly",
+    "cache": "readonly",
+    "typeOf": "readonly",
+    "deepCopy": "readonly",
+    "recursion": "readonly",
+    "openUrl": "readonly",
+    "closeUrl": "readonly",
+    "isEqual": "readonly",
+    "isWhite": "readonly"
+  }
+}

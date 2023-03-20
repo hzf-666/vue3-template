@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@a/*": ["./src/assets/*"],
+      "@c/*": ["./src/components/*"],
+      "@d/*": ["./src/directives/*"],
+      "@h/*": ["./src/hooks/*"],
+      "@p/*": ["./src/plugins/*"],
+      "@u/*": ["./src/utils/*"],
+      "@v/*": ["./src/views/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
