@@ -13,7 +13,8 @@
     "docs": "vitepress init",
     "docs:dev": "env-cmd -x vitepress dev docs --host=$VITE_HOST --port=$VITE_DOCS_PORT",
     "docs:build": "vitepress build docs",
-    "docs:preview": "env-cmd -x vitepress preview docs --host=$VITE_HOST --port=$VITE_DOCS_PORT"
+    "docs:preview": "env-cmd -x vitepress preview docs --host=$VITE_HOST --port=$VITE_DOCS_PORT",
+    "docs:serve": "env-cmd -x vitepress serve docs --port=$VITE_DOCS_PORT"
   },
   "dependencies": {
     "@vueuse/core": "^9.13.0",
