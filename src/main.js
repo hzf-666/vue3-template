@@ -3,15 +3,10 @@ import App from './App.vue';
 import 'normalize.css';
 import 'animate.css';
 import './scss/index.scss';
-import * as utils from './utils';
 import plugins from './plugins';
 import directives from './directives';
 
 const app = createApp(App);
-
-for (const k in utils) {
-  app.config.globalProperties[`$${ k }`] = utils[k];
-}
 
 (async function() {
   await Promise.all(plugins.map(plugin => plugin(app)));
@@ -23,6 +18,10 @@ for (const k in utils) {
     app.use(router);
     const http = await import('./http');
     app.config.globalProperties.$http = http.default;
+    const utils = await import('./utils');
+    for (const k in utils) {
+      app.config.globalProperties[`$${ k }`] = utils[k];
+    }
   });
 
   app.mount('#app');
