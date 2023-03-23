@@ -1,18 +1,10 @@
 import axios from 'axios';
 import interceptor from './interceptor.js';
+import { createInstance, getUrl, isObj } from './config.js';
 
-const sourceMap = {}, dev = import.meta.env.DEV,
-  instance = axios.create({
-    timeout: 15000, // 超时设置
-  }),
+const sourceMap = {}, instance = createInstance(),
   white = {
     message: [],
-  },
-  proxy = {
-    '/api': {
-      target: dev ? 'http://localhost:6001' : '',
-      // rewrite: path => path.replace(/^\/api/, ''),
-    },
   };
 
 let source = axios.CancelToken.source(),
@@ -191,30 +183,10 @@ http.all = function(requests, allConfig) {
   });
 };
 
-function getUrl(url) {
-  const result = { baseURL: '', url };
-  if (!(url && typeof url === 'string')) return result;
-  let proxyItem;
-  for (const k in proxy) {
-    if (url.startsWith(k)) proxyItem = proxy[k];
-  }
-  if (typeof proxyItem === 'string') {
-    result.baseURL = proxyItem;
-  } else if (isObj(proxyItem)) {
-    proxyItem.rewrite && (result.url = proxyItem.rewrite(url));
-    if (typeof proxyItem.target === 'string') result.baseURL = proxyItem.target;
-  }
-  return result;
-}
-
 function showTip(msg, options = {}) {
   if (msg) {
     alert(msg);
   }
-}
-
-function isObj(val) {
-  return Object.prototype.toString.call(val) === '[object Object]';
 }
 
 function isFn(val) {

@@ -9,10 +9,13 @@ hero:
   actions:
     - theme: brand
       text: 起步
-      link: /getting-started
+      link: /start
     - theme: alt
-      text: 暂定
-      link: /
+      text: 目录结构
+      link: /directory
+    - theme: alt
+      text: 配置文件
+      link: /config
 
 features:
   - title: Feature A
