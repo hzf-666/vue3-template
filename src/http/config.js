@@ -8,6 +8,12 @@ const dev = import.meta.env.DEV,
     },
   };
 
+export const white = {
+  token: [],
+  message: [],
+  httpCount: [],
+};
+
 export function createInstance() {
   return axios.create({
     timeout: 15000, // 超时设置

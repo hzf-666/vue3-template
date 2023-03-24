@@ -1,11 +1,8 @@
 import axios from 'axios';
 import interceptor from './interceptor.js';
-import { createInstance, getUrl, isObj } from './config.js';
+import { white, createInstance, getUrl, isObj } from './config.js';
 
-const sourceMap = {}, instance = createInstance(),
-  white = {
-    message: [],
-  };
+const sourceMap = {}, instance = createInstance();
 
 let source = axios.CancelToken.source(),
   isLock = false, lockList = [];

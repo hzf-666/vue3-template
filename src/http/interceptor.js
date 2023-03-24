@@ -1,8 +1,6 @@
-const white = {
-    token: [],
-    httpCount: [],
-  },
-  { httpCount } = storeToRefs(store.useLayout());
+import { white } from './config.js';
+
+const { httpCount } = storeToRefs(store.useLayout());
 
 export default function(axios) {
   axios.interceptors.request.use(req => {
