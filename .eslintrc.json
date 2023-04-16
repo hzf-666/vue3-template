@@ -30,6 +30,7 @@
     "useElementBounding": "readonly",
     "useElementSize": "readonly",
     /* 自定义 */
+    "resolve": "readonly",
     "http": "readonly",
     "store": "readonly",
     "useCompName": "readonly",

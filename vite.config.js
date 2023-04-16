@@ -1,11 +1,11 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import autoImport from 'unplugin-auto-import/vite';
 import vueComponents from 'unplugin-vue-components/vite';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import postcssRelaxedUnit from 'postcss-relaxed-unit';
+import { getAlias, resolve } from './alias.js';
 import * as hooks from './src/hooks';
 import * as utils from './src/utils';
 
@@ -19,7 +19,6 @@ const fontSizeScale = 100;
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const dev = mode === 'development', env = loadEnv(mode, process.cwd()),
-    resolve = dir => path.resolve(__dirname, dir),
     outDir = 'dist';
 
   return {
@@ -38,16 +37,7 @@ export default defineConfig(({ mode }) => {
       assetsDir: 'static',
     },
     resolve: {
-      alias: {
-        '@': resolve('src'),
-        '@a': resolve('src/assets'),
-        '@c': resolve('src/components'),
-        '@d': resolve('src/directives'),
-        '@h': resolve('src/hooks'),
-        '@p': resolve('src/plugins'),
-        '@u': resolve('src/utils'),
-        '@v': resolve('src/views'),
-      }
+      alias: getAlias(resolve),
     },
     plugins: [
       vue(),
