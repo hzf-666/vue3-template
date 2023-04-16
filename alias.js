@@ -1,9 +1,5 @@
 import path from 'path';
 
-export function resolve(dir) {
-  return path.resolve(__dirname, dir);
-}
-
 const alias = {
   '@': 'src',
   '@a': 'src/assets',
@@ -14,6 +10,10 @@ const alias = {
   '@u': 'src/utils',
   '@v': 'src/views',
 };
+
+export function resolve(dir) {
+  return path.resolve(__dirname, dir);
+}
 
 export function getAlias(fn) {
   const result = {};
