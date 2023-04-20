@@ -1,10 +1,14 @@
 import axios from 'axios';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const dev = import.meta.env.DEV,
   proxy = {
     '/api': {
-      target: dev ? 'http://localhost:6001' : '',
-    // rewrite: path => path.replace(/^\/api/, ''),
+      dev: apiUrl,
+      // prod: '',
+      // target: '',
+      // rewrite: path => path.replace(/^\/api/, ''),
     },
   };
 
@@ -31,7 +35,13 @@ export function getUrl(url) {
     result.baseURL = proxyItem;
   } else if (isObj(proxyItem)) {
     proxyItem.rewrite && (result.url = proxyItem.rewrite(url));
-    if (typeof proxyItem.target === 'string') result.baseURL = proxyItem.target;
+    if (typeof proxyItem.target === 'string') {
+      result.baseURL = proxyItem.target;
+    } else if (dev) {
+      if (typeof proxyItem.dev === 'string') result.baseURL = proxyItem.dev;
+    } else {
+      if (typeof proxyItem.prod === 'string') result.baseURL = proxyItem.prod;
+    }
   }
   return result;
 }
