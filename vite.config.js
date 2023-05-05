@@ -35,6 +35,26 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir,
       assetsDir: 'static',
+      chunkSizeWarningLimit: 500,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+      rollupOptions: {
+        output: {
+          chunkFileNames: 'static/js/chunk-[name]-[hash].js',
+          entryFileNames: 'static/js/entry-[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.split('node_modules/')[1].split('/')[0];
+            }
+          },
+        },
+      },
     },
     resolve: {
       alias: getAlias(resolve),
