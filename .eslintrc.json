@@ -33,6 +33,8 @@
     "resolve": "readonly",
     "http": "readonly",
     "store": "readonly",
+    "useListener": "readonly",
+    "useTimer": "readonly",
     "useCompName": "readonly",
     "usePage": "readonly",
     "mexp": "readonly",

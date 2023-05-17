@@ -1,11 +1,9 @@
 <script setup>
 const { isMobile, keepAliveMap } = storeToRefs(store.useLayout());
 const standardWidth = 750, mobileMaxWidth = 900; // 移动端设计图基准宽度，最大移动设备宽度
+const listener = useListener();
+listener.add('resize', onResize);
 onResize();
-window.addEventListener('resize', onResize);
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', onResize);
-});
 function onResize() {
   const width = document.documentElement.clientWidth;
   isMobile.value = width <= mobileMaxWidth;

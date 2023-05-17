@@ -1,3 +1,5 @@
+const initialPaths = ['keepAliveMap'];
+
 export default storeName => defineStore(storeName, {
   state: () => ({
     isMobile: false,
@@ -7,12 +9,18 @@ export default storeName => defineStore(storeName, {
   getters: {
   },
   actions: {
-    removeAlives(names = []) {
-      const newKeepAliveMap = deepCopy(this.keepAliveMap);
-      names.forEach(name => {
-        delete newKeepAliveMap[name];
+    init() {
+      this.$reset();
+      const obj = JSON.parse(cache().get(storeName));
+      initialPaths.forEach(item => {
+        delete obj[item];
       });
-      this.keepAliveMap = newKeepAliveMap;
+      cache().set(storeName, JSON.stringify(obj));
+    },
+    removeAlives(names = []) {
+      names.forEach(name => {
+        delete this.keepAliveMap[name];
+      });
     },
     resetAlives(names = []) {
       names.forEach(name => {
@@ -30,6 +38,6 @@ export default storeName => defineStore(storeName, {
   },
   persist: {
     storage: sessionStorage,
-    paths: ['keepAliveMap'],
+    paths: [...initialPaths],
   },
 });

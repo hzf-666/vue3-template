@@ -2,7 +2,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const modules = import.meta.glob(['./*.js'], { eager: true });
 
-export const store = {};
+const store = {}, pinia = createPinia();
 
 for (const path in modules) {
   const name = path.replace(/\.\/(.*)\.js/, '$1'), mod = modules[path];
@@ -10,5 +10,6 @@ for (const path in modules) {
     store[`use${ name[0].toUpperCase() }${ name.substring(1) }`] = mod.default(name);
   }
 }
+pinia.use(piniaPluginPersistedstate);
 
-export default createPinia().use(piniaPluginPersistedstate);
+export { store, pinia };
