@@ -5,7 +5,7 @@ const listener = useListener();
 listener.add('resize', onResize);
 onResize();
 function onResize() {
-  const width = document.documentElement.clientWidth;
+  const width = parseFloat(getComputedStyle(document.documentElement).width);
   isMobile.value = width <= mobileMaxWidth;
   if (window.responsive) {
     document.documentElement.style.fontSize = `${ window.fontSizeScale * (width > mobileMaxWidth ? (standardWidth / 750 * 0.5) : (width / standardWidth)) }px`;

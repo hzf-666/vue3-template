@@ -61,6 +61,37 @@ export function recursion(tree = [], callback, { children = 'children', parent =
   }
 }
 
+export function debounce(fn, delay) { // 防抖函数
+  let timerId;
+  return function(...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+
+export function throttle(fn, delay) { // 节流函数
+  let timerId;
+  return function(...args) {
+    if (!timerId) {
+      timerId = setTimeout(() => {
+        fn.apply(this, args);
+        timerId = null;
+      }, delay);
+    }
+  };
+}
+
+export function els(i) {
+  return {
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-box-orient': 'vertical',
+    '-webkit-line-clamp': i,
+  };
+}
+
 export function openUrl(args = []) {
   if (!args[0]) return;
   window.open(args);
