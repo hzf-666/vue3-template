@@ -1,9 +1,7 @@
-import { resolveStatic } from '../../alias.js';
 import dayjs from 'dayjs';
 import Mexp from 'math-expression-evaluator';
 import _cache from './cache.js';
 
-export const resolve = resolveStatic;
 export const dayjsFormat = ({ date, format = 'YYYY-MM-DD HH:mm' } = {}) => dayjs(date).format(format);
 export const mexp = new Mexp();
 export const cache = _cache;

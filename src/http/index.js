@@ -1,6 +1,6 @@
 import axios from 'axios';
 import interceptor from './interceptor.js';
-import { white, createInstance, getUrl, isObj } from './config.js';
+import { white, createInstance, getHttpURL, isObj } from './config.js';
 
 const sourceMap = {}, instance = createInstance();
 
@@ -10,7 +10,7 @@ let source = axios.CancelToken.source(),
 interceptor(instance);
 
 function http([httpURL, options] = [], config) {
-  const { baseURL, url } = getUrl(httpURL);
+  const { baseURL, url } = getHttpURL(httpURL);
 
   options = {
     ...options,

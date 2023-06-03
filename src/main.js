@@ -19,6 +19,9 @@ directives(app);
   const http = await import('./http');
   app.config.globalProperties.$http = http.default;
 
+  const getAsset = await import('./getAsset.js');
+  app.config.globalProperties.$getAsset = getAsset.default;
+
   const utils = await import('./utils');
   for (const k in utils) {
     app.config.globalProperties[`$${ k }`] = utils[k];

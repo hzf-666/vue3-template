@@ -36,7 +36,7 @@
     "useTimer": "readonly",
     "useCompName": "readonly",
     "usePage": "readonly",
-    "resolve": "readonly",
+    "getAsset": "readonly",
     "dayjsFormat": "readonly",
     "mexp": "readonly",
     "cache": "readonly",
