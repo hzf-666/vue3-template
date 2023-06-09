@@ -24,7 +24,7 @@ export function createInstance() {
   });
 }
 
-export function getUrl(url) {
+export function getHttpURL(url) {
   const result = { baseURL: '', url };
   if (!(url && typeof url === 'string')) return result;
   let proxyItem;

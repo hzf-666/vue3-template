@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
@@ -5,9 +6,10 @@ import autoImport from 'unplugin-auto-import/vite';
 import vueComponents from 'unplugin-vue-components/vite';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import postcssRelaxedUnit from 'postcss-relaxed-unit';
-import { getAlias, resolve } from './alias.js';
 import * as hooks from './src/hooks';
 import * as utils from './src/utils';
+
+const resolve = dir => path.resolve(__dirname, dir);
 
 const autoDirs = {
   hooks: Object.keys(hooks),
@@ -17,9 +19,10 @@ const autoDirs = {
 const fontSizeScale = 100;
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  const dev = mode === 'development', env = loadEnv(mode, process.cwd()),
-    outDir = 'dist';
+export default defineConfig(({ mode, command }) => {
+  const env = loadEnv(mode, process.cwd());
+  const outDir = 'dist', assetsDir = 'static';
+  const dev = mode === 'development' && command !== 'build', base = dev ? '/' : `/${ outDir }/`;
 
   return {
     define: {
@@ -31,10 +34,10 @@ export default defineConfig(({ mode }) => {
       host: env.VITE_HOST,
       port: env.VITE_PORT,
     },
-    base: dev ? '/' : `/${ outDir }/`,
+    base,
     build: {
       outDir,
-      assetsDir: 'static',
+      assetsDir,
       chunkSizeWarningLimit: 500,
       minify: 'terser',
       terserOptions: {
@@ -45,9 +48,9 @@ export default defineConfig(({ mode }) => {
       },
       rollupOptions: {
         output: {
-          chunkFileNames: 'static/js/chunk-[name]-[hash].js',
-          entryFileNames: 'static/js/entry-[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          entryFileNames: `${ assetsDir }/js/entry-[name]-[hash].js`,
+          chunkFileNames: `${ assetsDir }/js/chunk-[name]-[hash].js`,
+          assetFileNames: `${ assetsDir }/[ext]/[name]-[hash].[ext]`,
           manualChunks(id) {
             if (id.includes('node_modules')) {
               return id.split('node_modules/')[1].split('/')[0];
@@ -57,7 +60,16 @@ export default defineConfig(({ mode }) => {
       },
     },
     resolve: {
-      alias: getAlias(resolve),
+      alias: {
+        '@': resolve('src'),
+        '@a': resolve('src/assets'),
+        '@c': resolve('src/components'),
+        '@d': resolve('src/directives'),
+        '@h': resolve('src/hooks'),
+        '@p': resolve('src/plugins'),
+        '@u': resolve('src/utils'),
+        '@v': resolve('src/views'),
+      },
     },
     plugins: [
       vue(),
@@ -78,6 +90,9 @@ export default defineConfig(({ mode }) => {
             }
             if (name === 'store') {
               return { from: '@/store', name };
+            }
+            if (name === 'getAsset') {
+              return { from: '@/getAsset', name: 'default' };
             }
           },
         ],
