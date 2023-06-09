@@ -6,6 +6,7 @@
     /* vue3 */
     "getCurrentInstance": "readonly",
     "ref": "readonly",
+    "isRef": "readonly",
     "computed": "readonly",
     "watch": "readonly",
     "nextTick": "readonly",
