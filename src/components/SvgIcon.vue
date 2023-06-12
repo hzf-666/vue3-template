@@ -23,7 +23,7 @@ const { isMobile } = storeToRefs(store.useLayout());
 
 const iconSize = computed(() => {
   if (!size.value) return '';
-  return isNaN(Number(size.value)) ? size.value : window.responsive && isMobile.value ? '' : `${ size.value }px`;
+  return isNaN(Number(size.value)) ? size.value : responsive && isMobile.value ? '' : `${ size.value }px`;
 });
 </script>
 

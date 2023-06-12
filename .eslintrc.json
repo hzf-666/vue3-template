@@ -31,6 +31,9 @@
     "useElementBounding": "readonly",
     "useElementSize": "readonly",
     /* 自定义 */
+    "fontSizeScale": "readonly",
+    "responsive": "readonly",
+    "vconsole": "readonly",
     "http": "readonly",
     "store": "readonly",
     "useListener": "readonly",

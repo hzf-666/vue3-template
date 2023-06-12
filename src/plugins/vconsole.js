@@ -1,4 +1,4 @@
-if (import.meta.env.DEV && window.vconsole) {
+if (import.meta.env.DEV && vconsole) {
   await import('vconsole').then(({ default: VConsole }) => {
     new VConsole();
   });

@@ -7,8 +7,8 @@ onResize();
 function onResize() {
   const width = parseFloat(getComputedStyle(document.documentElement).width);
   isMobile.value = width <= mobileMaxWidth;
-  if (window.responsive) {
-    document.documentElement.style.fontSize = `${ window.fontSizeScale * (width > mobileMaxWidth ? (standardWidth / 750 * 0.5) : (width / standardWidth)) }px`;
+  if (responsive) {
+    document.documentElement.style.fontSize = `${ fontSizeScale * (width > mobileMaxWidth ? (standardWidth / 750 * 0.5) : (width / standardWidth)) }px`;
   }
 }
 </script>
