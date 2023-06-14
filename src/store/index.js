@@ -1,4 +1,4 @@
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { createPersistedState } from 'pinia-plugin-persistedstate';
 
 const modules = import.meta.glob(['./*.js'], { eager: true });
 
@@ -10,6 +10,10 @@ for (const path in modules) {
     store[`use${ name[0].toUpperCase() }${ name.substring(1) }`] = mod.default(name);
   }
 }
-pinia.use(piniaPluginPersistedstate);
+pinia.use(
+  createPersistedState({
+    storage: sessionStorage,
+  })
+);
 
 export { store, pinia };
