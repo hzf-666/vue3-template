@@ -53,9 +53,9 @@ function http([httpURL, options] = [], config) {
     tipProps = config?.tipOptions?.props;
 
     const successTip = config?.tipOptions?.success, failTip = config?.tipOptions?.fail,
-      onResolve = (failed) => {
+      onResolve = () => {
         if (isWhite(url, white.message)) result.message = '';
-        if (failed) tipProps.type = 'fail';
+        tipProps.type = result.code == 200 ? 'success' : 'fail';
         if (isShowTip) showTip(result.message, tipProps);
         resolve(result);
       };
@@ -63,10 +63,8 @@ function http([httpURL, options] = [], config) {
     instance(url, options).then(res => {
       result = { ...result, ...res.data };
       if (result.code == 200) {
-        tipProps.type = 'success';
         if (successTip) result.message = successTip;
       } else {
-        tipProps.type = 'fail';
         if (failTip) result.message = failTip;
       }
       if (result.code == 401) { // 未传token
@@ -85,7 +83,7 @@ function http([httpURL, options] = [], config) {
       } else {
         result.message = '无法连接服务器！';
       }
-      onResolve(true);
+      onResolve();
     });
   });
 }
