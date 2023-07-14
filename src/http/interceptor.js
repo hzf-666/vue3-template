@@ -12,15 +12,11 @@ export default function(axios) {
     req.headers.Pragma = 'no-cache';
 
     if (!isWhite(req.url, white.httpCount)) {
-      new Promise((resolve, reject) => {
-        req.cancelHttpCount = reject;
-        setTimeout(() => {
-          resolve();
-        }, 100);
-      }).then(() => {
-        delete req.cancelHttpCount;
+      req.httpCountTimer = setTimeout(() => {
+        clearTimeout(req.httpCountTimer);
+        req.httpCountTimer = null;
         setHttpCount();
-      }).catch(() => {});
+      }, 100);
     }
 
     return req;
@@ -46,10 +42,10 @@ function setHttpCount(finished = false) {
 }
 
 function handleHttpCount(res) {
-  const { url, cancelHttpCount } = res.config;
+  const { url, httpCountTimer } = res.config;
   if (isWhite(url, white.httpCount)) return;
-  if (cancelHttpCount) {
-    cancelHttpCount();
+  if (httpCountTimer) {
+    clearTimeout(httpCountTimer);
   } else {
     setHttpCount(true);
   }
