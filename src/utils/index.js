@@ -91,8 +91,9 @@ export function els(i) {
 }
 
 export function rx(size) {
-  if (isNaN(Number(size))) return '';
-  return `${ Number(size) / fontSizeScale }rem`;
+  size = Number(size);
+  if (isNaN(size)) return '';
+  return `${ size / fontSizeScale }rem`;
 }
 
 export function openUrl(args = []) {
