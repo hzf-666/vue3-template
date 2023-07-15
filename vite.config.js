@@ -2,8 +2,8 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
-import autoImport from 'unplugin-auto-import/vite';
 import vueComponents from 'unplugin-vue-components/vite';
+import autoImport from 'unplugin-auto-import/vite';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import postcssRelaxedUnit from 'postcss-relaxed-unit';
 import * as hooks from './src/hooks';
@@ -74,6 +74,7 @@ export default defineConfig(({ mode, command }) => {
     plugins: [
       vue(),
       vueSetupExtend(),
+      vueComponents(),
       autoImport({
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core', {
           vue: ['defineEmits', 'defineExpose', 'defineProps'],
@@ -97,7 +98,6 @@ export default defineConfig(({ mode, command }) => {
           },
         ],
       }),
-      vueComponents(),
       createSvgIconsPlugin({
         iconDirs: [ // 指定需要缓存的图标文件夹
           resolve('src/assets/iconsvg'),
