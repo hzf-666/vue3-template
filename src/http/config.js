@@ -1,16 +1,15 @@
 import axios from 'axios';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const { MODE, VITE_API_URL, VITE_PROD_API_URL } = import.meta.env, modeDev = MODE === 'development';
 
-const dev = import.meta.env.DEV,
-  proxy = {
-    '/api': {
-      dev: apiUrl,
-      // prod: '',
-      // target: '',
-      // rewrite: path => path.replace(/^\/api/, ''),
-    },
-  };
+const proxy = {
+  '/api': {
+    dev: VITE_API_URL,
+    prod: VITE_PROD_API_URL,
+    // target: '',
+    // rewrite: path => path.replace(/^\/api/, ''),
+  },
+};
 
 export const white = {
   token: [],
@@ -37,7 +36,7 @@ export function getHttpURL(url) {
     proxyItem.rewrite && (result.url = proxyItem.rewrite(url));
     if (typeof proxyItem.target === 'string') {
       result.baseURL = proxyItem.target;
-    } else if (dev) {
+    } else if (modeDev) {
       if (typeof proxyItem.dev === 'string') result.baseURL = proxyItem.dev;
     } else {
       if (typeof proxyItem.prod === 'string') result.baseURL = proxyItem.prod;

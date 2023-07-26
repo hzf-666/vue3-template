@@ -4,7 +4,3 @@ dist
 dist.*
 !.*
 !.*.js
-
-docs/.vitepress/cache
-docs/.vitepress/dist
-docs/.vitepress/dist.*

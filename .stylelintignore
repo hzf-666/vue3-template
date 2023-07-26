@@ -2,7 +2,3 @@ node_modules
 public
 dist
 dist.*
-
-docs/.vitepress/cache
-docs/.vitepress/dist
-docs/.vitepress/dist.*

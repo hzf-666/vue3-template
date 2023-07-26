@@ -13,10 +13,6 @@ dist.*
 dist-ssr
 *.local
 
-docs/.vitepress/cache
-docs/.vitepress/dist
-docs/.vitepress/dist.*
-
 # Editor directories and files/*
 .idea
 .DS_Store
