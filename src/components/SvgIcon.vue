@@ -6,7 +6,7 @@ const props = defineProps({
     },
     size: {
       type: [Number, String],
-      default: () => (0),
+      default: () => (null),
     },
     color: {
       type: [String],
@@ -23,14 +23,14 @@ const { isMobile } = storeToRefs(store.useLayout());
 
 const isMb = computed(() => responsive && isMobile.value),
   iconSize = computed(() => {
+    if (size.value === null || isMb.value) return '';
     const _size = Number(size.value);
-    if (isNaN(_size) || isMb.value) return '';
-    return `${ _size }px`;
+    return isNaN(_size) ? size.value : `${ _size }px`;
   }),
   iconMbSize = computed(() => {
+    if (size.value === null || !isMb.value) return '';
     const _size = Number(size.value);
-    if (isNaN(_size) || !isMb.value) return '';
-    return rx(_size);
+    return isNaN(_size) ? size.value : rx(_size);
   });
 </script>
 
