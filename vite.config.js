@@ -22,7 +22,7 @@ const fontSizeScale = 100;
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd());
   const outDir = 'dist', assetsDir = 'static';
-  const dev = mode === 'development' && command !== 'build', base = dev ? '/' : `/${ outDir }/`;
+  const prod = command === 'build', base = prod ? `/${ outDir }/` : '/';
 
   return {
     define: {

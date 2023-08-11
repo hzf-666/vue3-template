@@ -3,12 +3,19 @@ import { pinia } from './store';
 import 'normalize.css';
 import 'animate.css';
 import './scss/index.scss';
-import plugins from './plugins';
 import directives from './directives';
+import * as utils from './utils';
+import plugins from './plugins';
 
 const App = defineAsyncComponent(() => import('./App.vue')), app = createApp(App);
 app.use(pinia);
 directives(app);
+
+[utils].forEach(item => {
+  for (const k in item) {
+    app.config.globalProperties[`$${ k }`] = item[k];
+  }
+});
 
 (async function() {
   await Promise.all(plugins.map(plugin => plugin(app)));
@@ -21,11 +28,6 @@ directives(app);
 
   const getAsset = await import('./getAsset.js');
   app.config.globalProperties.$getAsset = getAsset.default;
-
-  const utils = await import('./utils');
-  for (const k in utils) {
-    app.config.globalProperties[`$${ k }`] = utils[k];
-  }
 
   app.mount('#app');
 })();
