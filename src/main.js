@@ -2,7 +2,6 @@ import { defineAsyncComponent, createApp } from 'vue';
 import { pinia } from './store';
 import 'normalize.css';
 import 'animate.css';
-import './scss/index.scss';
 import directives from './directives';
 import * as utils from './utils';
 import plugins from './plugins';
@@ -19,6 +18,7 @@ directives(app);
 
 (async function() {
   await Promise.all(plugins.map(plugin => plugin(app)));
+  import('./scss/index.scss');
 
   const { default: router } = await import('./router');
   app.use(router);

@@ -53,7 +53,8 @@ export default defineConfig(({ mode, command }) => {
           assetFileNames: `${ assetsDir }/[ext]/[name]-[hash].[ext]`,
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              return id.split('node_modules/')[1].split('/')[0];
+              const modulePath = id.split('node_modules/')[1].split('/'), moduleName = modulePath[0];
+              return moduleName;
             }
           },
         },
