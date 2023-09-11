@@ -1,4 +1,3 @@
-import { defineAsyncComponent, createApp } from 'vue';
 import { pinia } from './store';
 import 'normalize.css';
 import 'animate.css';

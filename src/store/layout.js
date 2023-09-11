@@ -1,6 +1,6 @@
 const initialPaths = ['keepAliveMap'];
 
-export default storeName => defineStore(storeName, {
+export default (storeName, storage) => defineStore(storeName, {
   state: () => ({
     isMobile: false,
     httpCount: 0,
@@ -11,11 +11,11 @@ export default storeName => defineStore(storeName, {
   actions: {
     init() {
       this.$reset();
-      const obj = JSON.parse(cache().get(storeName));
+      const obj = JSON.parse(storage.getItem(storeName));
       initialPaths.forEach(item => {
         delete obj[item];
       });
-      cache().set(storeName, JSON.stringify(obj));
+      storage.setItem(storeName, JSON.stringify(obj));
     },
     removeAlives(names = []) {
       names.forEach(name => {

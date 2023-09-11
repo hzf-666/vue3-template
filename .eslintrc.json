@@ -4,6 +4,8 @@
   ],
   "globals": {
     /* vue3 */
+    "defineAsyncComponent": "readonly",
+    "createApp": "readonly",
     "getCurrentInstance": "readonly",
     "ref": "readonly",
     "isRef": "readonly",
